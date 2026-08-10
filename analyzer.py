@@ -1,20 +1,25 @@
 from parser import parse_cpp_code
 from detectors.long_function import find_long_functions
+from detectors.deep_nesting import find_deep_nesting
 
 
 def analyze_cpp(source_code):
     tree = parse_cpp_code(source_code)
 
-    issues = find_long_functions(
-        tree,
-        source_code
+    issues = []
+
+    issues.extend(
+        find_long_functions(tree, source_code)
+    )
+
+    issues.extend(
+        find_deep_nesting(tree, source_code)
     )
 
     return {
         "language": "cpp",
         "issues": issues
     }
-
 
 if __name__ == "__main__":
     code = """
