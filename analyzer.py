@@ -1,6 +1,7 @@
 from parser import parse_cpp_code
 from detectors.long_function import find_long_functions
 from detectors.deep_nesting import find_deep_nesting
+from detectors.too_many_parameters import find_too_many_parameters
 
 
 def analyze_cpp(source_code):
@@ -14,6 +15,10 @@ def analyze_cpp(source_code):
 
     issues.extend(
         find_deep_nesting(tree, source_code)
+    )
+
+    issues.extend(
+    find_too_many_parameters(tree, source_code)
     )
 
     return {
