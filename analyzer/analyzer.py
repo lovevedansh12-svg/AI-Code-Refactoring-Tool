@@ -18,11 +18,12 @@ def analyze_cpp(source_code):
     )
 
     issues.extend(
-    find_too_many_parameters(tree, source_code)
+        find_too_many_parameters(tree, source_code)
     )
 
     return {
         "language": "cpp",
+        "total_issues": len(issues),
         "issues": issues
     }
 
