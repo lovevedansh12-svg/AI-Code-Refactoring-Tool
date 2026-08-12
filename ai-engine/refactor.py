@@ -1,5 +1,7 @@
 import json
 
+from schema import RefactoringResult
+
 
 class RefactoringEngine:
 
@@ -46,4 +48,8 @@ Return your response as JSON with exactly these fields:
 
         response = self.model.generate(prompt)
 
-        return response
+        return RefactoringResult(
+            refactored_code=response["refactored_code"],
+            changes=response["changes"],
+            explanation=response["explanation"]
+        )
