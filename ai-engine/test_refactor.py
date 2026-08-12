@@ -1,5 +1,5 @@
 from refactor import RefactoringEngine
-from model import MockModel
+from model import OpenAIModel
 
 
 code = """
@@ -35,7 +35,7 @@ analysis_report = {
 }
 
 
-model = MockModel()
+model = OpenAIModel()
 
 engine = RefactoringEngine(model)
 
