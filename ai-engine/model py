@@ -1,0 +1,13 @@
+class MockModel:
+
+    def generate(self, prompt):
+        return {
+            "refactored_code": "// Mock refactored C++ code",
+            "changes": [
+                "Mock response for development"
+            ],
+            "explanation": (
+                "This is a temporary mock response. "
+                "The real AI model will be connected later."
+            )
+        }
