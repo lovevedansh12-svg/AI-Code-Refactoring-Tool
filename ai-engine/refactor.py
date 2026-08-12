@@ -1,35 +1,42 @@
+import json
+
+
 class RefactoringEngine:
 
     def __init__(self, model):
         self.model = model
 
     def build_prompt(self, source_code, analysis_report):
-        prompt = f"""
+        return f"""
 You are an expert C++ code refactoring assistant.
 
-Your task is to refactor the provided C++ code.
+Refactor the provided C++ code based on the static analysis report.
 
-IMPORTANT RULES:
+Rules:
 1. Preserve the original behavior.
-2. Do not change the program's intended output.
-3. Fix the issues identified by static analysis.
+2. Preserve the intended output.
+3. Fix the detected issues.
 4. Improve readability and maintainability.
-5. Do not make unnecessary changes.
+5. Do not make unrelated changes.
 6. Return valid C++ code.
 
-STATIC ANALYSIS REPORT:
-{analysis_report}
+Static Analysis Report:
+{json.dumps(analysis_report, indent=2)}
 
-ORIGINAL C++ CODE:
+Original C++ Code:
 {source_code}
 
-Return:
-1. Refactored C++ code
-2. List of changes made
-3. Explanation of why each change was made
-"""
+Return your response as JSON with exactly these fields:
 
-        return prompt
+{{
+    "refactored_code": "complete refactored C++ code",
+    "changes": [
+        "description of change 1",
+        "description of change 2"
+    ],
+    "explanation": "overall explanation of the refactoring"
+}}
+"""
 
     def refactor(self, source_code, analysis_report):
         prompt = self.build_prompt(
